@@ -1,0 +1,59 @@
+edition: 1.0.0
+name: fc-stable-diffusion
+access: default
+vars:
+  region: "cn-hangzhou"
+  service: "fc-stable-diffuson"
+services:
+  stable-diffusion-original:
+    component: fc
+    props:
+      region: ${vars.region}
+      service:
+        description: stable-diffusion
+        internetAccess: true
+        ossMountConfig:
+          mountPoints: []
+        name: ${vars.service}
+      function:
+        handler: index.handler
+        timeout: 7200
+        diskSize: 10240
+        caPort: 7860
+        instanceType: fc.gpu.tesla.1
+        runtime: custom-container
+        cpu: 8
+        customContainerConfig:
+          args: ""
+          accelerationType: Default
+          image:
+            "registry-vpc.cn-hangzhou.aliyuncs.com/fc-stable-diffusion/stable-diffus\
+            ion:v1"
+          accelerationInfo:
+            status: Preparing
+          command: ""
+          webServerMode: true
+        instanceConcurrency: 100
+        memorySize: 32768
+        environmentVariables: {}
+        gpuMemorySize: 16384
+        name: sd-server
+        asyncConfiguration: {}
+      triggers:
+        - name: defaultTrigger
+          description: ""
+          type: http
+          qualifier: LATEST
+          config:
+            methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            authType: anonymous
+            disableURLInternet: false
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
