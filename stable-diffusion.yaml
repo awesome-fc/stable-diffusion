@@ -27,8 +27,7 @@ services:
           args: ""
           accelerationType: Default
           image:
-            "registry-vpc.cn-hangzhou.aliyuncs.com/fc-stable-diffusion/stable-diffus\
-            ion:v1"
+            "registry-vpc.cn-hangzhou.aliyuncs.com/fc-stable-diffusion/stable-diffusion:v1"
           accelerationInfo:
             status: Preparing
           command: ""
