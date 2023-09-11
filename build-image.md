@@ -44,8 +44,10 @@ docker build -t sd:v1 .
 ```
 ### 4. 本地测试
 运行镜像
+> v1.6.0与python3.8有兼容性问题，详见[issue](https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/13054)
 ```bash
 docker run -ti -p7860:7860 --rm --ipc=host sd:v1 bash
+git checkout v1.5.0 
 python3 launch.py --listen --skip-torch-cuda-test --no-half
 ```
 在浏览器中访问 https://localhost:7860 
