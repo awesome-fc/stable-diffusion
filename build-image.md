@@ -17,8 +17,13 @@ git lfs pull -include "v1-5-pruned-emaonly.safetensors"
 mv majicmixRealistic_v5.safetensors ../stable-diffusion-webui/models/Stable-diffusion/
 ```
 ### 3. 构建镜像
+```bash
+cd ~/stable-diffusion-webui
+vim Dockerfile
+```
+Dockerfile 文件内容如下。
 ```dockerfile
-FROM nvidia/cuda:11.3.0-cudnn8-runtime-ubuntu20.04
+FROM docker.io/nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
 libgl1 libglib2.0-0 wget git curl vim python3 python3-venv && \
